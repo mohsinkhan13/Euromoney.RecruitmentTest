@@ -7,5 +7,6 @@ namespace ContentConsole.Utilities
     public interface IWordFilter
     {
         string Filter(string word, IEnumerable<BadWord> badWords);
+        bool ApplyFilter { get; set; }
     }
 }

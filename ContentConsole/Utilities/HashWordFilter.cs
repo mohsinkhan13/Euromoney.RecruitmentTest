@@ -7,9 +7,18 @@ namespace ContentConsole.Utilities
     public class HashWordFilter : IWordFilter
     {
         private const char Hash = '#';
-       
+
+        public HashWordFilter()
+        {
+            ApplyFilter = true;
+        }
+
+        public bool ApplyFilter { get; set; }
+
         public string Filter(string word, IEnumerable<BadWord> badWords)
         {
+            if (!ApplyFilter) return word;
+
             var hashedWord = "";
 
             var val = badWords.FirstOrDefault(x => x.Value == word);

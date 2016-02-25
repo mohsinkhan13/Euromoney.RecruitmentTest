@@ -23,6 +23,7 @@ namespace ContentConsole
                 Console.WriteLine("Press 1 for content check");
                 Console.WriteLine("Press 2 to add Bad word");
                 Console.WriteLine("Press 3 to remove Bad word");
+                Console.WriteLine("Press 4 to toggle Negative word filter");
                 Console.WriteLine("Press X to exit");
                 input = Console.ReadLine() ?? "";
                 switch (input)
@@ -40,6 +41,12 @@ namespace ContentConsole
                     case "3":
                     {
                         TriggerBadWordRemoval(out badWords);
+                        break;
+                    }
+                    case "4":
+                    {
+                        WordFilter.ApplyFilter = !WordFilter.ApplyFilter;
+                        Console.WriteLine(string.Format("Negative word filter is now {0}", WordFilter.ApplyFilter ? "enabled" : "disabled"));
                         break;
                     }
                 }
