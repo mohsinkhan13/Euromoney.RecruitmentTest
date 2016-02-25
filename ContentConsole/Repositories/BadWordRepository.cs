@@ -11,7 +11,7 @@ namespace ContentConsole.Repositories
 
         public BadWordRepository()
         {
-            //TODO introduce IOC like Autofac
+            // TODO introduce IOC like Autofac
             _library = new BadWordLibrary();
         }
 

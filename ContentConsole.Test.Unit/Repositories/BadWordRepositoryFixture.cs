@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using ContentConsole.Libraries;
 using ContentConsole.Models;
 using ContentConsole.Repositories;
 using NUnit.Framework;
