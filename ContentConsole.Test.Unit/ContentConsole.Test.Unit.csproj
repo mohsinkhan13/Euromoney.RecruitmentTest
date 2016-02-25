@@ -50,6 +50,7 @@
     <Compile Include="Libraries\BadWordLibraryFixture.cs" />
     <Compile Include="Models\BadWordFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\BadWordRepositoryFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
