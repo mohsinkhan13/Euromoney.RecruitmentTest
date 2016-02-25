@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ContentConsole.Libraries;
 using ContentConsole.Models;
 using ContentConsole.Repositories;
+using ContentConsole.Utilities;
 
 namespace ContentConsole
 {
@@ -11,6 +11,7 @@ namespace ContentConsole
     {
         //TODO introduce IOC like autofac, etc
         private static readonly IRepository Repository = new BadWordRepository();
+        private static  readonly IWordFilter WordFilter = new HashWordFilter();
 
         public static void Main(string[] args)
         {
@@ -83,18 +84,21 @@ namespace ContentConsole
 
             var contentList = content.ToLower().Split(' ').ToList();
 
+            var filteredContent = contentList.Aggregate((x,y)=> WordFilter.Filter(x, badWords) + " " + WordFilter.Filter(y, badWords));
+
             var count = badWords.Select(
                 word => contentList.Where(x => x.Contains(word.Value.ToLower())))
                 .Select(res => res.Count())
                 .Sum();
 
             Console.WriteLine("Scanned the text:");
-            Console.WriteLine(content);
+            Console.WriteLine(filteredContent);
             Console.WriteLine("Total Number of negative words: " + count);
 
             Console.WriteLine("Press ANY key to exit.");
         }
 
+        
         private static IEnumerable<BadWord> InitializeBadWordsLibrary()
         {
             Repository.Add(new BadWord { Value = "swine" });
