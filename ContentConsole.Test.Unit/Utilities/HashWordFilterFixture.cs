@@ -43,5 +43,41 @@ namespace ContentConsole.Test.Unit.Utilities
 
             Assert.AreEqual(expectedWord, actualWord);
         }
+
+        [Test]
+        public void ApplyFilterFlagDefaultsToTrue()
+        {
+            var filter = new HashWordFilter();
+            
+            Assert.IsTrue(filter.ApplyFilter);
+        }
+
+        [Test]
+        public void ApplyFilterFlagCanBesetToFalse()
+        {
+            var filter = new HashWordFilter();
+            filter.ApplyFilter = false;
+
+            Assert.IsFalse(filter.ApplyFilter);
+        }
+
+        [Test]
+        public void FilterDoesNotHashIfApplyFilterIsFalse()
+        {
+            const string expectedWord = "horrible";
+            var badWords = new List<BadWord>
+            {
+                new BadWord{Value = "bad"},
+                new BadWord{Value = "swine"},
+                new BadWord{Value = "horrible"},
+            };
+
+            var filter = new HashWordFilter();
+            filter.ApplyFilter = false;
+
+            var actualWord = filter.Filter("horrible", badWords);
+
+            Assert.AreEqual(expectedWord, actualWord);
+        }
     }
 }
